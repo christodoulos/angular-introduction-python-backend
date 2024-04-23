@@ -9,6 +9,7 @@ customer = Blueprint("customer", __name__)
 
 
 @customer.route("/create", methods=["POST"])
+@jwt_required()
 def add_customer():
     try:
         data = request.get_json()
@@ -23,6 +24,7 @@ def add_customer():
 
 
 @customer.route("/email/<string:email>", methods=["GET"])
+@jwt_required()
 def get_customer_by_email(email):
     try:
         customer = Customer.objects(email=email).first()
